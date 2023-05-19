@@ -61,6 +61,14 @@ void loop() {
     lcd.print(compteur);
   }
   prevStatus = currStatus;
-  //Envoi score panier au robot
-  hc05.write(compteur);
+  if(hc05.available()) 
+  while(1){
+  {
+    int score=hc05.read();
+    lcd.clear();
+    lcd.setCursor(0, 0); lcd.print("Score total:");
+    lcd.setCursor(0,1); lcd.print(compteur+score);
+  }}
+
+
 }
