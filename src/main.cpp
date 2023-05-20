@@ -43,8 +43,6 @@ void setup() {
 
   //Affichage nb cerises
   delay(2000);
-  lcd.setCursor(0,0); lcd.print("Score cerises:");
-  lcd.setCursor(0,1); lcd.print("Score total: "); lcd.setCursor(14,1); lcd.print(compteur+score);
 
   
 }
@@ -59,7 +57,9 @@ void loop() {
     if (compteur==0) score += 5;
     compteur ++;
     //Màj nb cerises sur affichage LCD
-    lcd.setCursor(14,0);  lcd.print(compteur);
+    lcd.setCursor(0,0); lcd.print("Score cerises:"); lcd.setCursor(14,0);  lcd.print(compteur);
+    lcd.setCursor(0,1); lcd.print("Score total: "); lcd.setCursor(14,1); lcd.print(compteur+score);
+
   }
   prevStatus = currStatus;
 }
