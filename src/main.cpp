@@ -8,7 +8,6 @@
 #define keyPin 5 //Pin activation AT/data
 #define hc05BR 38400 //Baudrate module BT
 #define IRSensor 10
-#define score 26
 
 LiquidCrystal_I2C lcd(0x27, 16, 2); // I2C address 0x27, 16 column and 2 rows
 
@@ -17,7 +16,7 @@ SoftwareSerial hc05(txPin, rxPin); //Tx | Rx pdv HC05
 //Robot: 98d3,11,fcc42f
 //Panier: 98D3,41,F62269
 
-int compteur=-1, currStatus=1, prevStatus=1;
+int score = 26, compteur=-1, currStatus=1, prevStatus=1;
 
 void setup() {
   pinMode(IRSensor, INPUT);
@@ -57,6 +56,7 @@ void loop() {
   currStatus = digitalRead(IRSensor);
   if (prevStatus==1 && currStatus==0)
   {
+    if (compteur==0) score += 5;
     compteur ++;
     //Màj nb cerises sur affichage LCD
     lcd.setCursor(14,0);  lcd.print(compteur);
