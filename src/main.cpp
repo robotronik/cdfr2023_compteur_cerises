@@ -8,6 +8,7 @@
 #define keyPin 5 //Pin activation AT/data
 #define hc05BR 38400 //Baudrate module BT
 #define IRSensor 10
+#define score 26
 
 LiquidCrystal_I2C lcd(0x27, 16, 2); // I2C address 0x27, 16 column and 2 rows
 
@@ -35,7 +36,7 @@ void setup() {
   lcd.setCursor(0, 1); lcd.print("BT connection");
 
   //Attente connexion BT
-  while (digitalRead(statePin) !=1 ){}
+  // while (digitalRead(statePin) !=1 ){}
 
   //Affichage message connexion BT réussie
   lcd.clear();
@@ -43,7 +44,8 @@ void setup() {
 
   //Affichage nb cerises
   delay(2000);
-  lcd.setCursor(0,0); lcd.print("Nombre cerises:");
+  lcd.setCursor(0,0); lcd.print("Score cerises:");
+  lcd.setCursor(0,1); lcd.print("Score total: "); lcd.setCursor(14,1); lcd.print(compteur+score);
 
   
 }
@@ -57,18 +59,7 @@ void loop() {
   {
     compteur ++;
     //Màj nb cerises sur affichage LCD
-    lcd.setCursor(0,1);  lcd.print(compteur);
+    lcd.setCursor(14,0);  lcd.print(compteur);
   }
   prevStatus = currStatus;
-  if(hc05.available()) 
-  while(1){
-  {
-    int score=hc05.read();
-    lcd.clear();
-    lcd.setCursor(0, 0); lcd.print("Nb cerises: "); lcd.print(compteur);
-    lcd.setCursor(0,1); lcd.print("Score total: "); lcd.print(compteur+score);
-  }}
-  
-
-
 }
